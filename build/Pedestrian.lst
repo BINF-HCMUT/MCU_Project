@@ -1,0 +1,353 @@
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"Pedestrian.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.check_press,"ax",%progbits
+  16              		.align	1
+  17              		.global	check_press
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	check_press:
+  25              	.LFB65:
+  26              		.file 1 "./Core/Src/Pedestrian.c"
+   1:./Core/Src/Pedestrian.c **** /*
+   2:./Core/Src/Pedestrian.c ****  * Pedestrian.c
+   3:./Core/Src/Pedestrian.c ****  *
+   4:./Core/Src/Pedestrian.c ****  *  Created on: Dec 1, 2022
+   5:./Core/Src/Pedestrian.c ****  *      Author: admin
+   6:./Core/Src/Pedestrian.c ****  */
+   7:./Core/Src/Pedestrian.c **** #include"Pedestrian.h"
+   8:./Core/Src/Pedestrian.c **** void check_press(){
+  27              		.loc 1 8 19
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+   9:./Core/Src/Pedestrian.c **** 	if(is_button_pressed(0) && status < 20){
+  37              		.loc 1 9 5
+  38 0004 0020     		movs	r0, #0
+  39 0006 FFF7FEFF 		bl	is_button_pressed
+  40 000a 0346     		mov	r3, r0
+  41              		.loc 1 9 4
+  42 000c 002B     		cmp	r3, #0
+  43 000e 0AD0     		beq	.L3
+  44              		.loc 1 9 36 discriminator 1
+  45 0010 064B     		ldr	r3, .L4
+  46 0012 1B68     		ldr	r3, [r3]
+  47              		.loc 1 9 26 discriminator 1
+  48 0014 132B     		cmp	r3, #19
+  49 0016 06DC     		bgt	.L3
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 2
+
+
+  10:./Core/Src/Pedestrian.c **** 		setTimer4(60000);
+  50              		.loc 1 10 3
+  51 0018 4EF66020 		movw	r0, #60000
+  52 001c FFF7FEFF 		bl	setTimer4
+  11:./Core/Src/Pedestrian.c **** 		Pedes_press = 1;
+  53              		.loc 1 11 15
+  54 0020 034B     		ldr	r3, .L4+4
+  55 0022 0122     		movs	r2, #1
+  56 0024 1A60     		str	r2, [r3]
+  57              	.L3:
+  12:./Core/Src/Pedestrian.c **** 	}
+  13:./Core/Src/Pedestrian.c **** }
+  58              		.loc 1 13 1
+  59 0026 00BF     		nop
+  60 0028 80BD     		pop	{r7, pc}
+  61              	.L5:
+  62 002a 00BF     		.align	2
+  63              	.L4:
+  64 002c 00000000 		.word	status
+  65 0030 00000000 		.word	Pedes_press
+  66              		.cfi_endproc
+  67              	.LFE65:
+  69              		.section	.text.Pedestrian_behavior,"ax",%progbits
+  70              		.align	1
+  71              		.global	Pedestrian_behavior
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  75              		.fpu softvfp
+  77              	Pedestrian_behavior:
+  78              	.LFB66:
+  14:./Core/Src/Pedestrian.c **** void Pedestrian_behavior(){
+  79              		.loc 1 14 27
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 1, uses_anonymous_args = 0
+  83 0000 80B5     		push	{r7, lr}
+  84              		.cfi_def_cfa_offset 8
+  85              		.cfi_offset 7, -8
+  86              		.cfi_offset 14, -4
+  87 0002 00AF     		add	r7, sp, #0
+  88              		.cfi_def_cfa_register 7
+  15:./Core/Src/Pedestrian.c **** 	check_press();
+  89              		.loc 1 15 2
+  90 0004 FFF7FEFF 		bl	check_press
+  16:./Core/Src/Pedestrian.c **** 	if(Pedes_press == 1){
+  91              		.loc 1 16 17
+  92 0008 334B     		ldr	r3, .L17
+  93 000a 1B68     		ldr	r3, [r3]
+  94              		.loc 1 16 4
+  95 000c 012B     		cmp	r3, #1
+  96 000e 60D1     		bne	.L15
+  17:./Core/Src/Pedestrian.c **** 		switch (status) {
+  97              		.loc 1 17 3
+  98 0010 324B     		ldr	r3, .L17+4
+  99 0012 1B68     		ldr	r3, [r3]
+ 100 0014 0B3B     		subs	r3, r3, #11
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 3
+
+
+ 101 0016 032B     		cmp	r3, #3
+ 102 0018 45D8     		bhi	.L16
+ 103 001a 01A2     		adr	r2, .L10
+ 104 001c 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 105              		.p2align 2
+ 106              	.L10:
+ 107 0020 31000000 		.word	.L13+1
+ 108 0024 4F000000 		.word	.L12+1
+ 109 0028 69000000 		.word	.L11+1
+ 110 002c 83000000 		.word	.L9+1
+ 111              		.p2align 1
+ 112              	.L13:
+  18:./Core/Src/Pedestrian.c **** 				case M1_RED_GREEN:
+  19:./Core/Src/Pedestrian.c **** 					resetBuzzer();
+ 113              		.loc 1 19 6
+ 114 0030 FFF7FEFF 		bl	resetBuzzer
+  20:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_R_GPIO_Port, PEDES_R_Pin, 1);
+ 115              		.loc 1 20 6
+ 116 0034 0122     		movs	r2, #1
+ 117 0036 4FF48061 		mov	r1, #1024
+ 118 003a 2948     		ldr	r0, .L17+8
+ 119 003c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  21:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_G_GPIO_Port, PEDES_G_Pin, 0);
+ 120              		.loc 1 21 6
+ 121 0040 0022     		movs	r2, #0
+ 122 0042 4FF48071 		mov	r1, #256
+ 123 0046 2748     		ldr	r0, .L17+12
+ 124 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  22:./Core/Src/Pedestrian.c **** 					break;
+ 125              		.loc 1 22 6
+ 126 004c 2CE0     		b	.L14
+ 127              	.L12:
+  23:./Core/Src/Pedestrian.c **** 
+  24:./Core/Src/Pedestrian.c **** 				case M1_RED_YELLOW:
+  25:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_R_GPIO_Port, PEDES_R_Pin, 1);
+ 128              		.loc 1 25 6
+ 129 004e 0122     		movs	r2, #1
+ 130 0050 4FF48061 		mov	r1, #1024
+ 131 0054 2248     		ldr	r0, .L17+8
+ 132 0056 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  26:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_G_GPIO_Port, PEDES_G_Pin, 0);
+ 133              		.loc 1 26 6
+ 134 005a 0022     		movs	r2, #0
+ 135 005c 4FF48071 		mov	r1, #256
+ 136 0060 2048     		ldr	r0, .L17+12
+ 137 0062 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  27:./Core/Src/Pedestrian.c **** 					break;
+ 138              		.loc 1 27 6
+ 139 0066 1FE0     		b	.L14
+ 140              	.L11:
+  28:./Core/Src/Pedestrian.c **** 
+  29:./Core/Src/Pedestrian.c **** 				case M1_GREEN_RED:
+  30:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_R_GPIO_Port, PEDES_R_Pin, 0);
+ 141              		.loc 1 30 6
+ 142 0068 0022     		movs	r2, #0
+ 143 006a 4FF48061 		mov	r1, #1024
+ 144 006e 1C48     		ldr	r0, .L17+8
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 4
+
+
+ 145 0070 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  31:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_G_GPIO_Port, PEDES_G_Pin, 1);
+ 146              		.loc 1 31 6
+ 147 0074 0122     		movs	r2, #1
+ 148 0076 4FF48071 		mov	r1, #256
+ 149 007a 1A48     		ldr	r0, .L17+12
+ 150 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  32:./Core/Src/Pedestrian.c **** 					break;
+ 151              		.loc 1 32 6
+ 152 0080 12E0     		b	.L14
+ 153              	.L9:
+  33:./Core/Src/Pedestrian.c **** 
+  34:./Core/Src/Pedestrian.c **** 				case M1_YELLOW_RED:
+  35:./Core/Src/Pedestrian.c **** 					setBuzzer(count1);
+ 154              		.loc 1 35 6
+ 155 0082 194B     		ldr	r3, .L17+16
+ 156 0084 1B68     		ldr	r3, [r3]
+ 157 0086 1846     		mov	r0, r3
+ 158 0088 FFF7FEFF 		bl	setBuzzer
+  36:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_R_GPIO_Port, PEDES_R_Pin, 1);
+ 159              		.loc 1 36 6
+ 160 008c 0122     		movs	r2, #1
+ 161 008e 4FF48061 		mov	r1, #1024
+ 162 0092 1348     		ldr	r0, .L17+8
+ 163 0094 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  37:./Core/Src/Pedestrian.c **** 					HAL_GPIO_WritePin(PEDES_G_GPIO_Port, PEDES_G_Pin, 1);
+ 164              		.loc 1 37 6
+ 165 0098 0122     		movs	r2, #1
+ 166 009a 4FF48071 		mov	r1, #256
+ 167 009e 1148     		ldr	r0, .L17+12
+ 168 00a0 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  38:./Core/Src/Pedestrian.c **** 					break;
+ 169              		.loc 1 38 6
+ 170 00a4 00E0     		b	.L14
+ 171              	.L16:
+  39:./Core/Src/Pedestrian.c **** 
+  40:./Core/Src/Pedestrian.c **** 				default:
+  41:./Core/Src/Pedestrian.c **** 					break;
+ 172              		.loc 1 41 6
+ 173 00a6 00BF     		nop
+ 174              	.L14:
+  42:./Core/Src/Pedestrian.c **** 			}
+  43:./Core/Src/Pedestrian.c **** 		if(timer4_flag == 1){
+ 175              		.loc 1 43 18
+ 176 00a8 104B     		ldr	r3, .L17+20
+ 177 00aa 1B68     		ldr	r3, [r3]
+ 178              		.loc 1 43 5
+ 179 00ac 012B     		cmp	r3, #1
+ 180 00ae 10D1     		bne	.L15
+  44:./Core/Src/Pedestrian.c **** 			HAL_GPIO_WritePin(PEDES_R_GPIO_Port, PEDES_R_Pin, 0);
+ 181              		.loc 1 44 4
+ 182 00b0 0022     		movs	r2, #0
+ 183 00b2 4FF48061 		mov	r1, #1024
+ 184 00b6 0A48     		ldr	r0, .L17+8
+ 185 00b8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  45:./Core/Src/Pedestrian.c **** 			HAL_GPIO_WritePin(PEDES_G_GPIO_Port, PEDES_G_Pin, 0);
+ 186              		.loc 1 45 4
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 5
+
+
+ 187 00bc 0022     		movs	r2, #0
+ 188 00be 4FF48071 		mov	r1, #256
+ 189 00c2 0848     		ldr	r0, .L17+12
+ 190 00c4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  46:./Core/Src/Pedestrian.c **** 			Pedes_press = 0;
+ 191              		.loc 1 46 16
+ 192 00c8 034B     		ldr	r3, .L17
+ 193 00ca 0022     		movs	r2, #0
+ 194 00cc 1A60     		str	r2, [r3]
+  47:./Core/Src/Pedestrian.c **** 			resetBuzzer();
+ 195              		.loc 1 47 4
+ 196 00ce FFF7FEFF 		bl	resetBuzzer
+ 197              	.L15:
+  48:./Core/Src/Pedestrian.c **** 		}
+  49:./Core/Src/Pedestrian.c **** 	}
+  50:./Core/Src/Pedestrian.c **** }
+ 198              		.loc 1 50 1
+ 199 00d2 00BF     		nop
+ 200 00d4 80BD     		pop	{r7, pc}
+ 201              	.L18:
+ 202 00d6 00BF     		.align	2
+ 203              	.L17:
+ 204 00d8 00000000 		.word	Pedes_press
+ 205 00dc 00000000 		.word	status
+ 206 00e0 000C0140 		.word	1073810432
+ 207 00e4 00080140 		.word	1073809408
+ 208 00e8 00000000 		.word	count1
+ 209 00ec 00000000 		.word	timer4_flag
+ 210              		.cfi_endproc
+ 211              	.LFE66:
+ 213              		.text
+ 214              	.Letext0:
+ 215              		.file 2 "Core/Inc/software_timer.h"
+ 216              		.file 3 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 217              		.file 4 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 218              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 219              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 220              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 221              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 222              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 223              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 224              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 225              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 226              		.file 13 "Core/Inc/main.h"
+ 227              		.file 14 "Core/Inc/global.h"
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Pedestrian.c
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:16     .text.check_press:0000000000000000 $t
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:24     .text.check_press:0000000000000000 check_press
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:64     .text.check_press:000000000000002c $d
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:70     .text.Pedestrian_behavior:0000000000000000 $t
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:77     .text.Pedestrian_behavior:0000000000000000 Pedestrian_behavior
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:107    .text.Pedestrian_behavior:0000000000000020 $d
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:111    .text.Pedestrian_behavior:0000000000000030 $t
+C:\Users\kd\AppData\Local\Temp\cczt9CDn.s:204    .text.Pedestrian_behavior:00000000000000d8 $d
+                           .group:0000000000000000 wm4.0.e890922d021f7fff2fbf219cb2b38f03
+                           .group:0000000000000000 wm4.stm32f1xx_hal_conf.h.21.98635006afa9a018cfa5e0632ed4968b
+                           .group:0000000000000000 wm4.stm32f1xx.h.39.208bb8a61c892b7c37d899c49a031330
+                           .group:0000000000000000 wm4.stm32f103xb.h.38.ec967d5ad9d3269cb0788eebda048e38
+                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
+                           .group:0000000000000000 wm4.features.h.33.318b64d71e0957639cfb30f1db1f7ec8
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:0000000000000000 wm4.cmsis_version.h.32.4d5822004c01a829a975260e854b5f8e
+                           .group:0000000000000000 wm4.core_cm3.h.66.fc46cac19810db8f98d67da7ef88f42c
+                           .group:0000000000000000 wm4.cmsis_gcc.h.26.225e4f5469716fdeef823d1102f5b23e
+                           .group:0000000000000000 wm4.core_cm3.h.127.f4474120f1a7524deb56f9d74ff175da
+                           .group:0000000000000000 wm4.stm32f103xb.h.573.10249aa7473ca93be896fed94046a725
+                           .group:0000000000000000 wm4.stm32f1xx.h.162.96b09079a093c34dbd7f0b85cbd0ddee
+                           .group:0000000000000000 wm4.stm32_hal_legacy.h.23.91ba5b544a4c2be2620a1e7ff0049e10
+                           .group:0000000000000000 wm4.stddef.h.39.144cf5ddcd53cbfdac30259dc1a6c87f
+                           .group:0000000000000000 wm4.stm32f1xx_hal_def.h.57.18d01ce1aa74e9fb44dbf16f821a574a
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.95.21591bbc513aaa813c0b8640c3b32517
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc_ex.h.22.8763f99bc1e3e2dcf0febe9161d81b37
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.1202.f8e5f9e0cf4eef7840facf5396029056
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.22.fa638d688dcc57ca806fe6a7831b0d04
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio_ex.h.22.51a50ef3512cd78017ce666a32d364bf
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.263.f5ebf2f545ade59412ab9261c8e35dc4
+                           .group:0000000000000000 wm4.stm32f1xx_hal_exti.h.22.e26491d042c8079c3ca67eca341af862
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.22.3c14338534886827bf3aeaa2a7f412a1
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma_ex.h.22.001ac4d7f81ccbdcae49bd65c13858c8
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.409.cafcd2cfe701091535636be537c18293
+                           .group:0000000000000000 wm4.stm32f1xx_hal_cortex.h.22.b5f4174bb6a50d95405567b8f50e0900
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash.h.22.5cea9a7210e6315b41724b47b5fdf203
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash_ex.h.22.d4e19c21f2a86fa2f8ec2c2d5f1ab2af
+                           .group:0000000000000000 wm4.stm32f1xx_hal_pwr.h.22.3438c476faafc3240bf146f143df3fcd
+                           .group:0000000000000000 wm4.stm32f1xx_hal_tim.h.22.a16e206564e97dbace9faae59a0d6008
+                           .group:0000000000000000 wm4.stm32f1xx_hal_uart.h.22.5f7992e497faa36aa98f09f7214f4dbb
+                           .group:0000000000000000 wm4.stm32f1xx_hal.h.88.91065c0692bed6019c34f1e9c00589fd
+                           .group:0000000000000000 wm4.main.h.63.9180ad223388665f039ada817b185350
+                           .group:0000000000000000 wm4.global.h.14.30b62f1ac9d7308bb8bf1b062c6776ce
+
+UNDEFINED SYMBOLS
+is_button_pressed
+setTimer4
+status
+Pedes_press
+resetBuzzer
+HAL_GPIO_WritePin
+setBuzzer
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cczt9CDn.s 			page 7
+
+
+count1
+timer4_flag

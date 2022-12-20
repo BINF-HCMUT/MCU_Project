@@ -1,0 +1,188 @@
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"add_time.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.check_button_add_time,"ax",%progbits
+  16              		.align	1
+  17              		.global	check_button_add_time
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	check_button_add_time:
+  25              	.LFB65:
+  26              		.file 1 "./Core/Src/add_time.c"
+   1:./Core/Src/add_time.c **** /*
+   2:./Core/Src/add_time.c ****  * add_time.c
+   3:./Core/Src/add_time.c ****  *
+   4:./Core/Src/add_time.c ****  *  Created on: Dec 2, 2022
+   5:./Core/Src/add_time.c ****  *      Author: admin
+   6:./Core/Src/add_time.c ****  */
+   7:./Core/Src/add_time.c **** 
+   8:./Core/Src/add_time.c **** 
+   9:./Core/Src/add_time.c **** #include "add_time.h"
+  10:./Core/Src/add_time.c **** 
+  11:./Core/Src/add_time.c **** void check_button_add_time(){
+  27              		.loc 1 11 29
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  12:./Core/Src/add_time.c **** 	if(is_button_pressed(2)){
+  37              		.loc 1 12 5
+  38 0004 0220     		movs	r0, #2
+  39 0006 FFF7FEFF 		bl	is_button_pressed
+  40 000a 0346     		mov	r3, r0
+  41              		.loc 1 12 4
+  42 000c 002B     		cmp	r3, #0
+  43 000e 04D0     		beq	.L2
+  13:./Core/Src/add_time.c **** 		count2 += 100;
+  44              		.loc 1 13 10
+  45 0010 104B     		ldr	r3, .L5
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s 			page 2
+
+
+  46 0012 1B68     		ldr	r3, [r3]
+  47 0014 6433     		adds	r3, r3, #100
+  48 0016 0F4A     		ldr	r2, .L5
+  49 0018 1360     		str	r3, [r2]
+  50              	.L2:
+  14:./Core/Src/add_time.c **** 	}
+  15:./Core/Src/add_time.c **** 	if(is_button_pressed(3)){
+  51              		.loc 1 15 5
+  52 001a 0320     		movs	r0, #3
+  53 001c FFF7FEFF 		bl	is_button_pressed
+  54 0020 0346     		mov	r3, r0
+  55              		.loc 1 15 4
+  56 0022 002B     		cmp	r3, #0
+  57 0024 14D0     		beq	.L4
+  16:./Core/Src/add_time.c **** 		adding_time(count2);
+  58              		.loc 1 16 3
+  59 0026 0B4B     		ldr	r3, .L5
+  60 0028 1B68     		ldr	r3, [r3]
+  61 002a 1846     		mov	r0, r3
+  62 002c FFF7FEFF 		bl	adding_time
+  17:./Core/Src/add_time.c **** 		count1 = count1 + count2/100;
+  63              		.loc 1 17 27
+  64 0030 084B     		ldr	r3, .L5
+  65 0032 1B68     		ldr	r3, [r3]
+  66 0034 084A     		ldr	r2, .L5+4
+  67 0036 82FB0312 		smull	r1, r2, r2, r3
+  68 003a 5211     		asrs	r2, r2, #5
+  69 003c DB17     		asrs	r3, r3, #31
+  70 003e D21A     		subs	r2, r2, r3
+  71              		.loc 1 17 19
+  72 0040 064B     		ldr	r3, .L5+8
+  73 0042 1B68     		ldr	r3, [r3]
+  74 0044 1344     		add	r3, r3, r2
+  75              		.loc 1 17 10
+  76 0046 054A     		ldr	r2, .L5+8
+  77 0048 1360     		str	r3, [r2]
+  18:./Core/Src/add_time.c **** 		count2 = 0;
+  78              		.loc 1 18 10
+  79 004a 024B     		ldr	r3, .L5
+  80 004c 0022     		movs	r2, #0
+  81 004e 1A60     		str	r2, [r3]
+  82              	.L4:
+  19:./Core/Src/add_time.c **** 	}
+  20:./Core/Src/add_time.c **** }
+  83              		.loc 1 20 1
+  84 0050 00BF     		nop
+  85 0052 80BD     		pop	{r7, pc}
+  86              	.L6:
+  87              		.align	2
+  88              	.L5:
+  89 0054 00000000 		.word	count2
+  90 0058 1F85EB51 		.word	1374389535
+  91 005c 00000000 		.word	count1
+  92              		.cfi_endproc
+  93              	.LFE65:
+  95              		.text
+  96              	.Letext0:
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s 			page 3
+
+
+  97              		.file 2 "Core/Inc/software_timer.h"
+  98              		.file 3 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+  99              		.file 4 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 100              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 101              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 102              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 103              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 104              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 105              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 106              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 107              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 108              		.file 13 "Core/Inc/main.h"
+ 109              		.file 14 "Core/Inc/global.h"
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 add_time.c
+C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s:16     .text.check_button_add_time:0000000000000000 $t
+C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s:24     .text.check_button_add_time:0000000000000000 check_button_add_time
+C:\Users\kd\AppData\Local\Temp\ccvMSQ1C.s:89     .text.check_button_add_time:0000000000000054 $d
+                           .group:0000000000000000 wm4.0.e890922d021f7fff2fbf219cb2b38f03
+                           .group:0000000000000000 wm4.stm32f1xx_hal_conf.h.21.98635006afa9a018cfa5e0632ed4968b
+                           .group:0000000000000000 wm4.stm32f1xx.h.39.208bb8a61c892b7c37d899c49a031330
+                           .group:0000000000000000 wm4.stm32f103xb.h.38.ec967d5ad9d3269cb0788eebda048e38
+                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
+                           .group:0000000000000000 wm4.features.h.33.318b64d71e0957639cfb30f1db1f7ec8
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:0000000000000000 wm4.cmsis_version.h.32.4d5822004c01a829a975260e854b5f8e
+                           .group:0000000000000000 wm4.core_cm3.h.66.fc46cac19810db8f98d67da7ef88f42c
+                           .group:0000000000000000 wm4.cmsis_gcc.h.26.225e4f5469716fdeef823d1102f5b23e
+                           .group:0000000000000000 wm4.core_cm3.h.127.f4474120f1a7524deb56f9d74ff175da
+                           .group:0000000000000000 wm4.stm32f103xb.h.573.10249aa7473ca93be896fed94046a725
+                           .group:0000000000000000 wm4.stm32f1xx.h.162.96b09079a093c34dbd7f0b85cbd0ddee
+                           .group:0000000000000000 wm4.stm32_hal_legacy.h.23.91ba5b544a4c2be2620a1e7ff0049e10
+                           .group:0000000000000000 wm4.stddef.h.39.144cf5ddcd53cbfdac30259dc1a6c87f
+                           .group:0000000000000000 wm4.stm32f1xx_hal_def.h.57.18d01ce1aa74e9fb44dbf16f821a574a
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.95.21591bbc513aaa813c0b8640c3b32517
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc_ex.h.22.8763f99bc1e3e2dcf0febe9161d81b37
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.1202.f8e5f9e0cf4eef7840facf5396029056
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.22.fa638d688dcc57ca806fe6a7831b0d04
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio_ex.h.22.51a50ef3512cd78017ce666a32d364bf
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.263.f5ebf2f545ade59412ab9261c8e35dc4
+                           .group:0000000000000000 wm4.stm32f1xx_hal_exti.h.22.e26491d042c8079c3ca67eca341af862
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.22.3c14338534886827bf3aeaa2a7f412a1
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma_ex.h.22.001ac4d7f81ccbdcae49bd65c13858c8
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.409.cafcd2cfe701091535636be537c18293
+                           .group:0000000000000000 wm4.stm32f1xx_hal_cortex.h.22.b5f4174bb6a50d95405567b8f50e0900
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash.h.22.5cea9a7210e6315b41724b47b5fdf203
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash_ex.h.22.d4e19c21f2a86fa2f8ec2c2d5f1ab2af
+                           .group:0000000000000000 wm4.stm32f1xx_hal_pwr.h.22.3438c476faafc3240bf146f143df3fcd
+                           .group:0000000000000000 wm4.stm32f1xx_hal_tim.h.22.a16e206564e97dbace9faae59a0d6008
+                           .group:0000000000000000 wm4.stm32f1xx_hal_uart.h.22.5f7992e497faa36aa98f09f7214f4dbb
+                           .group:0000000000000000 wm4.stm32f1xx_hal.h.88.91065c0692bed6019c34f1e9c00589fd
+                           .group:0000000000000000 wm4.main.h.63.9180ad223388665f039ada817b185350
+                           .group:0000000000000000 wm4.global.h.14.30b62f1ac9d7308bb8bf1b062c6776ce
+
+UNDEFINED SYMBOLS
+is_button_pressed
+adding_time
+count2
+count1

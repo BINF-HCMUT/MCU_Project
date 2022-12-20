@@ -1,0 +1,224 @@
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"uart.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.comm	str,50,4
+  16              		.section	.rodata
+  17              		.align	2
+  18              	.LC0:
+  19 0000 256400   		.ascii	"%d\000"
+  20              		.section	.text.transmitdata,"ax",%progbits
+  21              		.align	1
+  22              		.global	transmitdata
+  23              		.arch armv7-m
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  27              		.fpu softvfp
+  29              	transmitdata:
+  30              	.LFB68:
+  31              		.file 1 "./Core/Src/uart.c"
+   1:./Core/Src/uart.c **** /*
+   2:./Core/Src/uart.c ****  * uart.c
+   3:./Core/Src/uart.c ****  *
+   4:./Core/Src/uart.c ****  *  Created on: Dec 7, 2022
+   5:./Core/Src/uart.c ****  *      Author: admin
+   6:./Core/Src/uart.c ****  */
+   7:./Core/Src/uart.c **** 
+   8:./Core/Src/uart.c **** 
+   9:./Core/Src/uart.c **** #include "uart.h"
+  10:./Core/Src/uart.c **** #include <stdio.h>
+  11:./Core/Src/uart.c **** char str[50];
+  12:./Core/Src/uart.c **** void transmitdata(){
+  32              		.loc 1 12 20
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 00AF     		add	r7, sp, #0
+  41              		.cfi_def_cfa_register 7
+  13:./Core/Src/uart.c **** 	if(status == M1_RED_GREEN){
+  42              		.loc 1 13 12
+  43 0004 124B     		ldr	r3, .L5
+  44 0006 1B68     		ldr	r3, [r3]
+  45              		.loc 1 13 4
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s 			page 2
+
+
+  46 0008 0B2B     		cmp	r3, #11
+  47 000a 10D1     		bne	.L2
+  14:./Core/Src/uart.c **** 		HAL_UART_Transmit(&huart2,(void*)str,sprintf(str,"%d",count1+5),1000);
+  48              		.loc 1 14 40
+  49 000c 114B     		ldr	r3, .L5+4
+  50 000e 1B68     		ldr	r3, [r3]
+  51 0010 0533     		adds	r3, r3, #5
+  52 0012 1A46     		mov	r2, r3
+  53 0014 1049     		ldr	r1, .L5+8
+  54 0016 1148     		ldr	r0, .L5+12
+  55 0018 FFF7FEFF 		bl	sprintf
+  56 001c 0346     		mov	r3, r0
+  57              		.loc 1 14 3
+  58 001e 9AB2     		uxth	r2, r3
+  59 0020 4FF47A73 		mov	r3, #1000
+  60 0024 0D49     		ldr	r1, .L5+12
+  61 0026 0E48     		ldr	r0, .L5+16
+  62 0028 FFF7FEFF 		bl	HAL_UART_Transmit
+  15:./Core/Src/uart.c **** 	}
+  16:./Core/Src/uart.c **** 	else{
+  17:./Core/Src/uart.c **** 		HAL_UART_Transmit(&huart2,(void*)str,sprintf(str,"%d",count1),1000);
+  18:./Core/Src/uart.c **** 	}
+  19:./Core/Src/uart.c **** }
+  63              		.loc 1 19 1
+  64 002c 0EE0     		b	.L4
+  65              	.L2:
+  17:./Core/Src/uart.c **** 	}
+  66              		.loc 1 17 40
+  67 002e 094B     		ldr	r3, .L5+4
+  68 0030 1B68     		ldr	r3, [r3]
+  69 0032 1A46     		mov	r2, r3
+  70 0034 0849     		ldr	r1, .L5+8
+  71 0036 0948     		ldr	r0, .L5+12
+  72 0038 FFF7FEFF 		bl	sprintf
+  73 003c 0346     		mov	r3, r0
+  17:./Core/Src/uart.c **** 	}
+  74              		.loc 1 17 3
+  75 003e 9AB2     		uxth	r2, r3
+  76 0040 4FF47A73 		mov	r3, #1000
+  77 0044 0549     		ldr	r1, .L5+12
+  78 0046 0648     		ldr	r0, .L5+16
+  79 0048 FFF7FEFF 		bl	HAL_UART_Transmit
+  80              	.L4:
+  81              		.loc 1 19 1
+  82 004c 00BF     		nop
+  83 004e 80BD     		pop	{r7, pc}
+  84              	.L6:
+  85              		.align	2
+  86              	.L5:
+  87 0050 00000000 		.word	status
+  88 0054 00000000 		.word	count1
+  89 0058 00000000 		.word	.LC0
+  90 005c 00000000 		.word	str
+  91 0060 00000000 		.word	huart2
+  92              		.cfi_endproc
+  93              	.LFE68:
+  95              		.text
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s 			page 3
+
+
+  96              	.Letext0:
+  97              		.file 2 "Core/Inc/software_timer.h"
+  98              		.file 3 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+  99              		.file 4 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 100              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 101              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 102              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 103              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 104              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 105              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 106              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 107              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 108              		.file 13 "Core/Inc/main.h"
+ 109              		.file 14 "Core/Inc/global.h"
+ 110              		.file 15 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 111              		.file 16 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 112              		.file 17 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 113              		.file 18 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 uart.c
+                            *COM*:0000000000000032 str
+C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s:17     .rodata:0000000000000000 $d
+C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s:21     .text.transmitdata:0000000000000000 $t
+C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s:29     .text.transmitdata:0000000000000000 transmitdata
+C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s:87     .text.transmitdata:0000000000000050 $d
+                           .group:0000000000000000 wm4.0.e890922d021f7fff2fbf219cb2b38f03
+                           .group:0000000000000000 wm4.stm32f1xx_hal_conf.h.21.98635006afa9a018cfa5e0632ed4968b
+                           .group:0000000000000000 wm4.stm32f1xx.h.39.208bb8a61c892b7c37d899c49a031330
+                           .group:0000000000000000 wm4.stm32f103xb.h.38.ec967d5ad9d3269cb0788eebda048e38
+                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
+                           .group:0000000000000000 wm4.features.h.33.318b64d71e0957639cfb30f1db1f7ec8
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:0000000000000000 wm4.cmsis_version.h.32.4d5822004c01a829a975260e854b5f8e
+                           .group:0000000000000000 wm4.core_cm3.h.66.fc46cac19810db8f98d67da7ef88f42c
+                           .group:0000000000000000 wm4.cmsis_gcc.h.26.225e4f5469716fdeef823d1102f5b23e
+                           .group:0000000000000000 wm4.core_cm3.h.127.f4474120f1a7524deb56f9d74ff175da
+                           .group:0000000000000000 wm4.stm32f103xb.h.573.10249aa7473ca93be896fed94046a725
+                           .group:0000000000000000 wm4.stm32f1xx.h.162.96b09079a093c34dbd7f0b85cbd0ddee
+                           .group:0000000000000000 wm4.stm32_hal_legacy.h.23.91ba5b544a4c2be2620a1e7ff0049e10
+                           .group:0000000000000000 wm4.stddef.h.39.144cf5ddcd53cbfdac30259dc1a6c87f
+                           .group:0000000000000000 wm4.stm32f1xx_hal_def.h.57.18d01ce1aa74e9fb44dbf16f821a574a
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.95.21591bbc513aaa813c0b8640c3b32517
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc_ex.h.22.8763f99bc1e3e2dcf0febe9161d81b37
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.1202.f8e5f9e0cf4eef7840facf5396029056
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.22.fa638d688dcc57ca806fe6a7831b0d04
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio_ex.h.22.51a50ef3512cd78017ce666a32d364bf
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.263.f5ebf2f545ade59412ab9261c8e35dc4
+                           .group:0000000000000000 wm4.stm32f1xx_hal_exti.h.22.e26491d042c8079c3ca67eca341af862
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.22.3c14338534886827bf3aeaa2a7f412a1
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma_ex.h.22.001ac4d7f81ccbdcae49bd65c13858c8
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.409.cafcd2cfe701091535636be537c18293
+                           .group:0000000000000000 wm4.stm32f1xx_hal_cortex.h.22.b5f4174bb6a50d95405567b8f50e0900
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash.h.22.5cea9a7210e6315b41724b47b5fdf203
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash_ex.h.22.d4e19c21f2a86fa2f8ec2c2d5f1ab2af
+                           .group:0000000000000000 wm4.stm32f1xx_hal_pwr.h.22.3438c476faafc3240bf146f143df3fcd
+                           .group:0000000000000000 wm4.stm32f1xx_hal_tim.h.22.a16e206564e97dbace9faae59a0d6008
+                           .group:0000000000000000 wm4.stm32f1xx_hal_uart.h.22.5f7992e497faa36aa98f09f7214f4dbb
+                           .group:0000000000000000 wm4.stm32f1xx_hal.h.88.91065c0692bed6019c34f1e9c00589fd
+                           .group:0000000000000000 wm4.main.h.63.9180ad223388665f039ada817b185350
+                           .group:0000000000000000 wm4.global.h.14.30b62f1ac9d7308bb8bf1b062c6776ce
+                           .group:0000000000000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:0000000000000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
+                           .group:0000000000000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
+                           .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:0000000000000000 wm4.stdio.h.31.7c0e28c411445f3f9c5b11accf882760
+                           .group:0000000000000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
+                           .group:0000000000000000 wm4.cdefs.h.49.75c8cf0da02add7669d4e6b77e254feb
+                           .group:0000000000000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
+                           .group:0000000000000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:0000000000000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
+                           .group:0000000000000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
+ARM GAS  C:\Users\kd\AppData\Local\Temp\cc4WoCUc.s 			page 5
+
+
+                           .group:0000000000000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:0000000000000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
+                           .group:0000000000000000 wm4.types.h.40.8b6acba56cefbb11746718204edc8f5e
+                           .group:0000000000000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
+                           .group:0000000000000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:0000000000000000 wm4._timeval.h.32.bec3221fa7a9bb0bdde696c9c57e47d2
+                           .group:0000000000000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:0000000000000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:0000000000000000 wm4.types.h.51.5571ec98f267d17d3c670b7a3ba33afa
+                           .group:0000000000000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:0000000000000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:0000000000000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:0000000000000000 wm4.stdio.h.81.932d0c162786b883f622b8d05c120c78
+
+UNDEFINED SYMBOLS
+sprintf
+HAL_UART_Transmit
+status
+count1
+huart2

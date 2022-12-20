@@ -1,0 +1,296 @@
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 6
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"M3_fsm.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.M3_fsm_run,"ax",%progbits
+  16              		.align	1
+  17              		.global	M3_fsm_run
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	M3_fsm_run:
+  25              	.LFB65:
+  26              		.file 1 "./Core/Src/M3_fsm.c"
+   1:./Core/Src/M3_fsm.c **** /*
+   2:./Core/Src/M3_fsm.c ****  * M3_fsm.c
+   3:./Core/Src/M3_fsm.c ****  *
+   4:./Core/Src/M3_fsm.c ****  *  Created on: Nov 14, 2022
+   5:./Core/Src/M3_fsm.c ****  *      Author: admin
+   6:./Core/Src/M3_fsm.c ****  */
+   7:./Core/Src/M3_fsm.c **** 
+   8:./Core/Src/M3_fsm.c **** #include "M3_fsm.h"
+   9:./Core/Src/M3_fsm.c **** 
+  10:./Core/Src/M3_fsm.c **** void M3_fsm_run(){
+  27              		.loc 1 10 18
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  11:./Core/Src/M3_fsm.c **** 	if(status == M3){
+  37              		.loc 1 11 12
+  38 0004 2F4B     		ldr	r3, .L8
+  39 0006 1B68     		ldr	r3, [r3]
+  40              		.loc 1 11 4
+  41 0008 1E2B     		cmp	r3, #30
+  42 000a 59D1     		bne	.L7
+  12:./Core/Src/M3_fsm.c **** 
+  13:./Core/Src/M3_fsm.c **** 		//Blinky YELLOW Led in 2Hz
+  14:./Core/Src/M3_fsm.c **** 		if(timer3_flag == 1){
+  43              		.loc 1 14 18
+  44 000c 2E4B     		ldr	r3, .L8+4
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 2
+
+
+  45 000e 1B68     		ldr	r3, [r3]
+  46              		.loc 1 14 5
+  47 0010 012B     		cmp	r3, #1
+  48 0012 13D1     		bne	.L3
+  15:./Core/Src/M3_fsm.c **** 			//blinky all YELLOW Led
+  16:./Core/Src/M3_fsm.c **** 			HAL_GPIO_TogglePin(A1_GPIO_Port, A1_Pin);
+  49              		.loc 1 16 4
+  50 0014 4FF48061 		mov	r1, #1024
+  51 0018 2C48     		ldr	r0, .L8+8
+  52 001a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  17:./Core/Src/M3_fsm.c **** 			HAL_GPIO_TogglePin(B1_GPIO_Port, B1_Pin);
+  53              		.loc 1 17 4
+  54 001e 0821     		movs	r1, #8
+  55 0020 2B48     		ldr	r0, .L8+12
+  56 0022 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  18:./Core/Src/M3_fsm.c **** 			HAL_GPIO_TogglePin(A2_GPIO_Port, A2_Pin);
+  57              		.loc 1 18 4
+  58 0026 2021     		movs	r1, #32
+  59 0028 2948     		ldr	r0, .L8+12
+  60 002a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  19:./Core/Src/M3_fsm.c **** 			HAL_GPIO_TogglePin(B2_GPIO_Port, B2_Pin);
+  61              		.loc 1 19 4
+  62 002e 1021     		movs	r1, #16
+  63 0030 2748     		ldr	r0, .L8+12
+  64 0032 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  20:./Core/Src/M3_fsm.c **** 			setTimer3(250);
+  65              		.loc 1 20 4
+  66 0036 FA20     		movs	r0, #250
+  67 0038 FFF7FEFF 		bl	setTimer3
+  68              	.L3:
+  21:./Core/Src/M3_fsm.c **** 		}
+  22:./Core/Src/M3_fsm.c **** 
+  23:./Core/Src/M3_fsm.c **** 		//count down the number display on 7-seg LED
+  24:./Core/Src/M3_fsm.c **** 		if(timer1_flag == 1){
+  69              		.loc 1 24 18
+  70 003c 254B     		ldr	r3, .L8+16
+  71 003e 1B68     		ldr	r3, [r3]
+  72              		.loc 1 24 5
+  73 0040 012B     		cmp	r3, #1
+  74 0042 08D1     		bne	.L4
+  25:./Core/Src/M3_fsm.c **** 			count1--;
+  75              		.loc 1 25 10
+  76 0044 244B     		ldr	r3, .L8+20
+  77 0046 1B68     		ldr	r3, [r3]
+  78 0048 013B     		subs	r3, r3, #1
+  79 004a 234A     		ldr	r2, .L8+20
+  80 004c 1360     		str	r3, [r2]
+  26:./Core/Src/M3_fsm.c **** 			setTimer1(1000);
+  81              		.loc 1 26 4
+  82 004e 4FF47A70 		mov	r0, #1000
+  83 0052 FFF7FEFF 		bl	setTimer1
+  84              	.L4:
+  27:./Core/Src/M3_fsm.c **** 		}
+  28:./Core/Src/M3_fsm.c **** 
+  29:./Core/Src/M3_fsm.c **** 		//Switch to M4 mode
+  30:./Core/Src/M3_fsm.c **** 		if(is_button_pressed(1)||timer2_flag == 1){
+  85              		.loc 1 30 6
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 3
+
+
+  86 0056 0120     		movs	r0, #1
+  87 0058 FFF7FEFF 		bl	is_button_pressed
+  88 005c 0346     		mov	r3, r0
+  89              		.loc 1 30 5
+  90 005e 002B     		cmp	r3, #0
+  91 0060 03D1     		bne	.L5
+  92              		.loc 1 30 40 discriminator 1
+  93 0062 1E4B     		ldr	r3, .L8+24
+  94 0064 1B68     		ldr	r3, [r3]
+  95              		.loc 1 30 26 discriminator 1
+  96 0066 012B     		cmp	r3, #1
+  97 0068 28D1     		bne	.L6
+  98              	.L5:
+  31:./Core/Src/M3_fsm.c **** 			HAL_GPIO_WritePin(A1_GPIO_Port, A1_Pin, 0);
+  99              		.loc 1 31 4
+ 100 006a 0022     		movs	r2, #0
+ 101 006c 4FF48061 		mov	r1, #1024
+ 102 0070 1648     		ldr	r0, .L8+8
+ 103 0072 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  32:./Core/Src/M3_fsm.c **** 			HAL_GPIO_WritePin(B1_GPIO_Port, B1_Pin, 0);
+ 104              		.loc 1 32 4
+ 105 0076 0022     		movs	r2, #0
+ 106 0078 0821     		movs	r1, #8
+ 107 007a 1548     		ldr	r0, .L8+12
+ 108 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  33:./Core/Src/M3_fsm.c **** 			HAL_GPIO_WritePin(A2_GPIO_Port, A2_Pin, 0);
+ 109              		.loc 1 33 4
+ 110 0080 0022     		movs	r2, #0
+ 111 0082 2021     		movs	r1, #32
+ 112 0084 1248     		ldr	r0, .L8+12
+ 113 0086 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  34:./Core/Src/M3_fsm.c **** 			HAL_GPIO_WritePin(B2_GPIO_Port, B2_Pin, 0);
+ 114              		.loc 1 34 4
+ 115 008a 0022     		movs	r2, #0
+ 116 008c 1021     		movs	r1, #16
+ 117 008e 1048     		ldr	r0, .L8+12
+ 118 0090 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  35:./Core/Src/M3_fsm.c **** 			status = M4;
+ 119              		.loc 1 35 11
+ 120 0094 0B4B     		ldr	r3, .L8
+ 121 0096 2822     		movs	r2, #40
+ 122 0098 1A60     		str	r2, [r3]
+  36:./Core/Src/M3_fsm.c **** 			count1 = 10;
+ 123              		.loc 1 36 11
+ 124 009a 0F4B     		ldr	r3, .L8+20
+ 125 009c 0A22     		movs	r2, #10
+ 126 009e 1A60     		str	r2, [r3]
+  37:./Core/Src/M3_fsm.c **** 			count2 = 0;
+ 127              		.loc 1 37 11
+ 128 00a0 0F4B     		ldr	r3, .L8+28
+ 129 00a2 0022     		movs	r2, #0
+ 130 00a4 1A60     		str	r2, [r3]
+  38:./Core/Src/M3_fsm.c **** 			setTimer1(1000);	//Timer 1 to countdown the number display on 2 Led.
+ 131              		.loc 1 38 4
+ 132 00a6 4FF47A70 		mov	r0, #1000
+ 133 00aa FFF7FEFF 		bl	setTimer1
+  39:./Core/Src/M3_fsm.c **** 			setTimer2(10000);	//Timer 2 is the quantity of time machine in mode 2 without increasing time.
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 4
+
+
+ 134              		.loc 1 39 4
+ 135 00ae 42F21070 		movw	r0, #10000
+ 136 00b2 FFF7FEFF 		bl	setTimer2
+  40:./Core/Src/M3_fsm.c **** 			setTimer3(250);		//Timer 3 to set RED Led blinky 2Hz
+ 137              		.loc 1 40 4
+ 138 00b6 FA20     		movs	r0, #250
+ 139 00b8 FFF7FEFF 		bl	setTimer3
+ 140              	.L6:
+  41:./Core/Src/M3_fsm.c **** 		}
+  42:./Core/Src/M3_fsm.c **** 
+  43:./Core/Src/M3_fsm.c **** 		//check whether user increases time or not.
+  44:./Core/Src/M3_fsm.c **** 		check_button_add_time();
+ 141              		.loc 1 44 3
+ 142 00bc FFF7FEFF 		bl	check_button_add_time
+ 143              	.L7:
+  45:./Core/Src/M3_fsm.c **** 
+  46:./Core/Src/M3_fsm.c **** 	}
+  47:./Core/Src/M3_fsm.c **** }
+ 144              		.loc 1 47 1
+ 145 00c0 00BF     		nop
+ 146 00c2 80BD     		pop	{r7, pc}
+ 147              	.L9:
+ 148              		.align	2
+ 149              	.L8:
+ 150 00c4 00000000 		.word	status
+ 151 00c8 00000000 		.word	timer3_flag
+ 152 00cc 00080140 		.word	1073809408
+ 153 00d0 000C0140 		.word	1073810432
+ 154 00d4 00000000 		.word	timer1_flag
+ 155 00d8 00000000 		.word	count1
+ 156 00dc 00000000 		.word	timer2_flag
+ 157 00e0 00000000 		.word	count2
+ 158              		.cfi_endproc
+ 159              	.LFE65:
+ 161              		.text
+ 162              	.Letext0:
+ 163              		.file 2 "Core/Inc/software_timer.h"
+ 164              		.file 3 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 165              		.file 4 "c:\\st\\stm32cubeide_1.7.0\\stm32cubeide\\plugins\\com.st.stm32cube.ide.mcu.externaltools
+ 166              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 167              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 168              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 169              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 170              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 171              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 172              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 173              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 174              		.file 13 "Core/Inc/main.h"
+ 175              		.file 14 "Core/Inc/global.h"
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 M3_fsm.c
+C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s:16     .text.M3_fsm_run:0000000000000000 $t
+C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s:24     .text.M3_fsm_run:0000000000000000 M3_fsm_run
+C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s:150    .text.M3_fsm_run:00000000000000c4 $d
+                           .group:0000000000000000 wm4.0.e890922d021f7fff2fbf219cb2b38f03
+                           .group:0000000000000000 wm4.stm32f1xx_hal_conf.h.21.98635006afa9a018cfa5e0632ed4968b
+                           .group:0000000000000000 wm4.stm32f1xx.h.39.208bb8a61c892b7c37d899c49a031330
+                           .group:0000000000000000 wm4.stm32f103xb.h.38.ec967d5ad9d3269cb0788eebda048e38
+                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
+                           .group:0000000000000000 wm4.features.h.33.318b64d71e0957639cfb30f1db1f7ec8
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:0000000000000000 wm4.cmsis_version.h.32.4d5822004c01a829a975260e854b5f8e
+                           .group:0000000000000000 wm4.core_cm3.h.66.fc46cac19810db8f98d67da7ef88f42c
+                           .group:0000000000000000 wm4.cmsis_gcc.h.26.225e4f5469716fdeef823d1102f5b23e
+                           .group:0000000000000000 wm4.core_cm3.h.127.f4474120f1a7524deb56f9d74ff175da
+                           .group:0000000000000000 wm4.stm32f103xb.h.573.10249aa7473ca93be896fed94046a725
+                           .group:0000000000000000 wm4.stm32f1xx.h.162.96b09079a093c34dbd7f0b85cbd0ddee
+                           .group:0000000000000000 wm4.stm32_hal_legacy.h.23.91ba5b544a4c2be2620a1e7ff0049e10
+                           .group:0000000000000000 wm4.stddef.h.39.144cf5ddcd53cbfdac30259dc1a6c87f
+                           .group:0000000000000000 wm4.stm32f1xx_hal_def.h.57.18d01ce1aa74e9fb44dbf16f821a574a
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.95.21591bbc513aaa813c0b8640c3b32517
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc_ex.h.22.8763f99bc1e3e2dcf0febe9161d81b37
+                           .group:0000000000000000 wm4.stm32f1xx_hal_rcc.h.1202.f8e5f9e0cf4eef7840facf5396029056
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.22.fa638d688dcc57ca806fe6a7831b0d04
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio_ex.h.22.51a50ef3512cd78017ce666a32d364bf
+                           .group:0000000000000000 wm4.stm32f1xx_hal_gpio.h.263.f5ebf2f545ade59412ab9261c8e35dc4
+                           .group:0000000000000000 wm4.stm32f1xx_hal_exti.h.22.e26491d042c8079c3ca67eca341af862
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.22.3c14338534886827bf3aeaa2a7f412a1
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma_ex.h.22.001ac4d7f81ccbdcae49bd65c13858c8
+                           .group:0000000000000000 wm4.stm32f1xx_hal_dma.h.409.cafcd2cfe701091535636be537c18293
+                           .group:0000000000000000 wm4.stm32f1xx_hal_cortex.h.22.b5f4174bb6a50d95405567b8f50e0900
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash.h.22.5cea9a7210e6315b41724b47b5fdf203
+                           .group:0000000000000000 wm4.stm32f1xx_hal_flash_ex.h.22.d4e19c21f2a86fa2f8ec2c2d5f1ab2af
+                           .group:0000000000000000 wm4.stm32f1xx_hal_pwr.h.22.3438c476faafc3240bf146f143df3fcd
+                           .group:0000000000000000 wm4.stm32f1xx_hal_tim.h.22.a16e206564e97dbace9faae59a0d6008
+                           .group:0000000000000000 wm4.stm32f1xx_hal_uart.h.22.5f7992e497faa36aa98f09f7214f4dbb
+                           .group:0000000000000000 wm4.stm32f1xx_hal.h.88.91065c0692bed6019c34f1e9c00589fd
+                           .group:0000000000000000 wm4.main.h.63.9180ad223388665f039ada817b185350
+                           .group:0000000000000000 wm4.global.h.14.30b62f1ac9d7308bb8bf1b062c6776ce
+
+UNDEFINED SYMBOLS
+HAL_GPIO_TogglePin
+setTimer3
+setTimer1
+is_button_pressed
+HAL_GPIO_WritePin
+setTimer2
+check_button_add_time
+status
+timer3_flag
+timer1_flag
+count1
+timer2_flag
+ARM GAS  C:\Users\kd\AppData\Local\Temp\ccz8SzSd.s 			page 6
+
+
+count2
